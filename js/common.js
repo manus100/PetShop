@@ -197,6 +197,16 @@ function showCart() {
 }
 
 function showHideMap(){
+    var mediaQueryList = window.matchMedia("(max-width: 650px)");
+    if (mediaQueryList.matches){
+   //     document.getElementById('map').setAttribute("href", "https://www.google.com/maps/embed/v1/place?key=AIzaSyClF-HHZIUUpVSDnu5Au9yxiPV2yqiWQl8&q=Strada+Covasna,Bucharest+Romania");
+   //     document.getElementById('map').setAttribute("target","_blank");
+        document.getElementById('ifrm').setAttribute("width", "60%");
+        document.getElementById('ifrm').setAttribute("height", "40%");
+}
+     //  }else{
+
+
     if (document.getElementById('ifrm').style.display==='block'){
         document.getElementById('ifrm').style.display='none';
     }else{
@@ -204,5 +214,6 @@ function showHideMap(){
         document.getElementById('ifrm').style.display='block';
     }
 }
+
 
 
