@@ -75,13 +75,13 @@ function showProducts() {
             </a>
         </div>`
     }
-    if (str!==""){
+    if (str !== "") {
         document.getElementById('main').innerHTML = str;
-    }else{
+    } else {
         document.getElementById('userMessage').innerHTML = 'Ne pare rau, nu exista nici un produs disponibil!'
         document.getElementById('userMessage').style.display = "block";
     }
-   
+
 }
 
 function getProductIDFromUrl() {
@@ -90,14 +90,6 @@ function getProductIDFromUrl() {
 
     return productID;
 }
-
-/*async function getDetails(productID) {
-    var detailsResponse = await fetch(`${url}${productID}.json`);  // preiau inf din bd
-    var details = await detailsResponse.json();   //returneaza un obiect
-
-    return details;
-}
-*/
 
 
 /** detaliile produsului selectat in pagina de index */
@@ -121,17 +113,17 @@ function getDetails(productID, refreshPage) {
 
 async function showDetails(detailsPromise) {
 
-    if (detailsPromise!=null){
-       
+    if (detailsPromise != null) {
+
         startSpinner();
-        var details =  await detailsPromise;
+        var details = await detailsPromise;
 
         document.querySelector("#detailsProductImg").src = details.Image;
         document.querySelector("#nameBrand").innerHTML = details.Name;
         document.querySelector("#detailsProductDetail").innerHTML = details.Details;
         document.querySelector("#detailsProductPrice").innerHTML = details.Price + ' RON';
         if (details.Qty > 0) {
-            if (details.Qty<5){
+            if (details.Qty < 5) {
                 document.querySelector("#disponibil").innerHTML = 'Stoc limitat';
             } else {
                 document.querySelector("#disponibil").innerHTML = 'In stoc';
@@ -141,8 +133,8 @@ async function showDetails(detailsPromise) {
         } else {
             document.querySelector("#disponibil").innerHTML = 'Indisponibil';
             document.querySelector("#disponibil").style.color = 'red';
-            document.querySelector("#addToCart").disabled=true;
-            document.querySelector("#addToCart").style.backgroundColor='darkgrey';
+            document.querySelector("#addToCart").disabled = true;
+            document.querySelector("#addToCart").style.backgroundColor = 'darkgrey';
         }
         document.querySelector("#disponibil").style.fontWeight = 'bold';
 
@@ -150,32 +142,31 @@ async function showDetails(detailsPromise) {
 
         stopSpinner();
         document.querySelector('#productDetails').style.display = "flex";
-    } else{
+    } else {
         //daca e null inseamna ca vine din pagina de cos, a dat click pe un produs pe care l-a sters admin-ul
         document.getElementById('productDetails').style.display = "none";
         document.getElementById('detailsProductShop').style.display = "none";
 
         document.getElementById('userMessage').innerHTML = 'Produsul nu mai face parte din oferta noastra!'
         document.getElementById('userMessage').style.display = "block";
-}
+    }
 
 
 
-    getSlides(); 
-    
+    getSlides();
+
 }
 
 function getCartNbOfItems() {
-    var nbOfItems=0;
+    var nbOfItems = 0;
     var cartList = JSON.parse(localStorage.getItem('cart'));
     if (cartList == null) {
         document.getElementById('cartItems').innerHTML = ' (0)';
     } else {
-            for (var i in cartList){
-                nbOfItems+=cartList[i].qty;
-            }
+        for (var i in cartList) {
+            nbOfItems += cartList[i].qty;
+        }
 
-        //document.getElementById('cartItems').innerHTML = ` (${cartList.length})`;
         document.getElementById('cartItems').innerHTML = `(${nbOfItems})`;
         return nbOfItems;
     }
@@ -196,22 +187,22 @@ function showCart() {
     document.getElementById('cartItems').innerHTML = ` (${counter})`;
 }
 
-function showHideMap(){
-    var mediaQueryList = window.matchMedia("(max-width: 650px)");
-    if (mediaQueryList.matches){
-   //     document.getElementById('map').setAttribute("href", "https://www.google.com/maps/embed/v1/place?key=AIzaSyClF-HHZIUUpVSDnu5Au9yxiPV2yqiWQl8&q=Strada+Covasna,Bucharest+Romania");
-   //     document.getElementById('map').setAttribute("target","_blank");
+function showHideMap() {
+    var mediaQueryList = window.matchMedia("(max-width: 700px)");
+    if (mediaQueryList.matches) {
+        //     document.getElementById('map').setAttribute("href", "https://www.google.com/maps/embed/v1/place?key=AIzaSyClF-HHZIUUpVSDnu5Au9yxiPV2yqiWQl8&q=Strada+Covasna,Bucharest+Romania");
+        //     document.getElementById('map').setAttribute("target","_blank");
         document.getElementById('ifrm').setAttribute("width", "60%");
         document.getElementById('ifrm').setAttribute("height", "40%");
-}
-     //  }else{
+    }
+    //  }else{
 
 
-    if (document.getElementById('ifrm').style.display==='block'){
-        document.getElementById('ifrm').style.display='none';
-    }else{
+    if (document.getElementById('ifrm').style.display === 'block') {
+        document.getElementById('ifrm').style.display = 'none';
+    } else {
         document.getElementById('ifrm').setAttribute("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyClF-HHZIUUpVSDnu5Au9yxiPV2yqiWQl8&q=Strada+Covasna,Bucharest+Romania");
-        document.getElementById('ifrm').style.display='block';
+        document.getElementById('ifrm').style.display = 'block';
     }
 }
 
